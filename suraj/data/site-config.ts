@@ -5,7 +5,7 @@ export const siteConfig = {
   description:
     "A passionate full-stack developer based in Pokhara, Nepal, building modern web applications with Next.js, React, and TypeScript.",
   location: "Pokhara, Nepal",
-  email: "suraj@example.com",
+  email: "surajshre348@gmail.com",
   bio: [
     "I'm a full-stack developer based in the beautiful city of Pokhara, Nepal. I specialize in building modern, performant web applications using Next.js, React, and TypeScript.",
     "With a keen eye for design and a passion for clean code, I create digital experiences that are both visually stunning and technically robust. I believe in writing code that's not just functional, but maintainable and scalable.",
@@ -17,16 +17,16 @@ export const siteConfig = {
     technologiesUsed: 15,
   },
   social: {
-    github: "https://github.com/suraj",
-    linkedin: "https://linkedin.com/in/suraj",
-    twitter: "https://twitter.com/suraj",
-    email: "mailto:suraj@example.com",
+    github: "https://github.com/surajshrestha8",
+    linkedin: "https://www.linkedin.com/in/suraj-shrestha-50995b1a3/",
+    twitter: "https://twitter.com",
+    email: "mailto:surajshre348@gmail.com",
   },
   seo: {
     title: "Suraj Shrestha | Full Stack Developer",
     description:
       "Portfolio of Suraj Shrestha — a full-stack developer from Pokhara, Nepal, specializing in Next.js, React, and TypeScript.",
-    url: "https://suraj.dev",
+    url: "https://surajshresth.com.np",
     ogImage: "https://suraj.dev/og.png",
     keywords: [
       "Suraj Shrestha",
