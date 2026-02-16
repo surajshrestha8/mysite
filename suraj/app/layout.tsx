@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/data/site-config";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,12 +34,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-black antialiased selection:bg-indigo-500/30 selection:text-indigo-200`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-white text-neutral-900 antialiased selection:bg-indigo-500/30 selection:text-indigo-200 dark:bg-black dark:text-neutral-50`}
       >
-        {children}
-        <ScrollToTop />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   );
