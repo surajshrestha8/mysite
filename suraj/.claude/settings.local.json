@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(git -C \"C:/Users/manju/Desktop/suraj/suraj\" log --oneline --all)",
+      "WebFetch(domain:ui.aceternity.com)",
+      "Bash(npm install:*)",
+      "Bash(npx husky init)",
+      "Bash(npm run lint)",
+      "Bash(npx shadcn@latest init:*)",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/suraj diff app/page.tsx)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/suraj show HEAD:suraj/app/page.tsx)"
+    ]
+  }
+}

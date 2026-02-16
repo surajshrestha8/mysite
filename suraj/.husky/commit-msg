@@ -1,0 +1,1 @@
+cd suraj && npx commitlint --edit $1
