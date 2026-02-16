@@ -1,5 +1,5 @@
 "use client";
-import React, { JSX, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -20,11 +20,35 @@ export const FloatingNav = ({
   className?: string;
 }) => {
   const { scrollYProgress } = useScroll();
-
   const [visible, setVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const observers = navItems.map((item) => {
+      const element = document.querySelector(item.link);
+      if (!element) return null;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(item.link);
+            }
+          });
+        },
+        { threshold: 0.5 }, // Trigger when 50% of the section is visible
+      );
+
+      observer.observe(element);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer?.disconnect());
+    };
+  }, [navItems]);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
     if (typeof current === "number") {
       const direction = current! - scrollYProgress.getPrevious()!;
 
@@ -65,10 +89,19 @@ export const FloatingNav = ({
             href={navItem.link}
             className={cn(
               "relative flex items-center space-x-1 text-neutral-600 hover:text-neutral-500 dark:text-neutral-50 dark:hover:text-neutral-300",
+              activeSection === navItem.link &&
+                "text-indigo-500 dark:text-indigo-400",
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
             <span className="hidden text-sm sm:block">{navItem.name}</span>
+            {activeSection === navItem.link && (
+              <motion.span
+                layoutId="activeNav"
+                className="absolute inset-0 -bottom-2 h-0.5 rounded-full bg-indigo-500"
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
           </a>
         ))}
         <a

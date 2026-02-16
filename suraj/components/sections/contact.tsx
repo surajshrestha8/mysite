@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { LampContainer } from "@/components/ui/lamp";
 import { siteConfig } from "@/data/site-config";
+import { ContactForm } from "@/components/ui/contact-form";
 
 const socialLinks = [
   {
@@ -34,8 +35,8 @@ const socialLinks = [
 
 export function Contact() {
   return (
-    <section id="contact">
-      <LampContainer className="min-h-[auto] pt-32 pb-20">
+    <section id="contact" className="relative z-50">
+      <LampContainer className="min-h-screen w-full pt-32 pb-20">
         <motion.h2
           initial={{ opacity: 0.5, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,42 +46,57 @@ export function Contact() {
           Let&apos;s Connect
         </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mx-auto mt-4 max-w-md text-center text-sm text-slate-400"
-        >
-          I&apos;m always open to new opportunities and collaborations. Feel
-          free to reach out!
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-          className="mt-10 grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2"
-        >
-          {socialLinks.map((link, index) => (
-            <motion.a
-              key={link.name}
-              href={link.url}
-              target={link.name === "Email" ? undefined : "_blank"}
-              rel={link.name === "Email" ? undefined : "noopener noreferrer"}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
-              whileHover={{ y: -4, scale: 1.02 }}
-              className="glass flex items-center gap-4 rounded-xl p-4 transition-all hover:border-indigo-500/30"
+        <div className="mt-20 grid w-full max-w-7xl grid-cols-1 gap-10 px-4 md:grid-cols-2 lg:gap-20">
+          <div className="flex flex-col items-center justify-center md:items-start">
+            <motion.p
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mb-8 max-w-md text-center text-lg text-slate-400 md:text-left"
             >
-              <link.icon className="h-6 w-6 text-indigo-400" />
-              <div>
-                <div className="font-medium text-white">{link.name}</div>
-                <div className="text-sm text-slate-500">{link.handle}</div>
-              </div>
-            </motion.a>
-          ))}
-        </motion.div>
+              I&apos;m always open to new opportunities and collaborations.
+              Whether you have a question or just want to say hi, I&apos;ll try
+              my best to get back to you!
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2"
+            >
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={link.name}
+                  href={link.url}
+                  target={link.name === "Email" ? undefined : "_blank"}
+                  rel={
+                    link.name === "Email" ? undefined : "noopener noreferrer"
+                  }
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className="glass flex items-center gap-4 rounded-xl border border-white/[0.1] bg-white/[0.02] p-4 transition-all hover:border-indigo-500/30 hover:bg-white/[0.05]"
+                >
+                  <link.icon className="h-5 w-5 text-indigo-400" />
+                  <div>
+                    <div className="text-sm font-medium text-white">
+                      {link.name}
+                    </div>
+                    <div className="text-xs text-slate-500">{link.handle}</div>
+                  </div>
+                </motion.a>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex items-center justify-center"
+          >
+            <ContactForm />
+          </motion.div>
+        </div>
       </LampContainer>
     </section>
   );
