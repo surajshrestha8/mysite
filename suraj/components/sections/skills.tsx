@@ -1,30 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { SectionWrapper } from "@/components/layout/section-wrapper";
-import { skillCategories, allSkills } from "@/data/skills";
+import { skillCategories } from "@/data/skills";
 import { Code2, Server, Database, Wrench } from "lucide-react";
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  Frontend: <Code2 className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />,
-  Backend: <Server className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />,
-  Database: (
-    <Database className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
-  ),
-  "Tools & DevOps": (
-    <Wrench className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
-  ),
+  Frontend: <Code2 className="h-5 w-5" />,
+  Backend: <Server className="h-5 w-5" />,
+  Database: <Database className="h-5 w-5" />,
+  "Tools & DevOps": <Wrench className="h-5 w-5" />,
 };
 
-const techTickerItems = allSkills.map((skill) => ({
-  quote: skill,
-  name: skill,
-  title: "",
-}));
-
 export function Skills() {
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+
   return (
     <SectionWrapper id="skills">
       <motion.h2
@@ -32,7 +23,7 @@ export function Skills() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="mb-12 text-center text-3xl font-bold text-neutral-900 sm:text-4xl dark:text-white"
+        className="mb-4 text-center text-3xl font-bold text-neutral-900 sm:text-4xl dark:text-white"
       >
         Skills &{" "}
         <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400">
@@ -40,38 +31,99 @@ export function Skills() {
         </span>
       </motion.h2>
 
-      <BentoGrid className="md:grid-cols-2 lg:grid-cols-4">
-        {skillCategories.map((category, index) => (
-          <BentoGridItem
-            key={index}
-            title={category.title}
-            description={category.description}
-            icon={categoryIcons[category.title]}
-            className="border-black/[0.06] bg-neutral-50 dark:border-white/[0.08] dark:bg-[#0f0f0f]"
-            header={
-              <div className="flex flex-wrap gap-2 p-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill.name}
-                    className="rounded-full border border-black/[0.08] bg-black/[0.03] px-3 py-1 text-xs text-neutral-600 transition-colors hover:border-indigo-500/50 hover:text-indigo-600 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-indigo-300"
-                  >
-                    {skill.name}
-                  </span>
-                ))}
-              </div>
-            }
-          />
-        ))}
-      </BentoGrid>
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="mx-auto mb-16 max-w-xl text-center text-neutral-500 dark:text-slate-400"
+      >
+        Technologies I use to bring ideas to life
+      </motion.p>
 
-      <div className="mt-12">
-        <InfiniteMovingCards
-          items={techTickerItems}
-          direction="left"
-          speed="slow"
-          pauseOnHover={false}
-          className="[&_blockquote>div]:hidden [&_blockquote>span:first-child]:font-medium [&_blockquote>span:first-child]:text-indigo-600 dark:[&_blockquote>span:first-child]:text-indigo-300 [&_li]:w-auto [&_li]:border-black/[0.06] [&_li]:bg-neutral-50 [&_li]:px-6 [&_li]:py-3 dark:[&_li]:border-white/[0.08] dark:[&_li]:bg-[#0f0f0f]"
-        />
+      <div className="space-y-14">
+        {skillCategories.map((category, catIndex) => (
+          <motion.div
+            key={category.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: catIndex * 0.1 }}
+          >
+            {/* Category header */}
+            <div className="mb-6 flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-500 dark:text-indigo-400">
+                {categoryIcons[category.title]}
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
+                  {category.title}
+                </h3>
+                <p className="text-xs text-neutral-500 dark:text-slate-500">
+                  {category.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Icon grid */}
+            <div className="grid grid-cols-4 gap-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
+              {category.skills.map((skill, index) => {
+                const isHovered = hoveredSkill === skill.name;
+
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.3,
+                      delay: catIndex * 0.1 + index * 0.05,
+                    }}
+                    onMouseEnter={() => setHoveredSkill(skill.name)}
+                    onMouseLeave={() => setHoveredSkill(null)}
+                    className="group relative flex flex-col items-center gap-2"
+                  >
+                    <div
+                      className="relative flex h-16 w-16 items-center justify-center rounded-xl border border-black/[0.06] bg-neutral-50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:h-20 sm:w-20 dark:border-white/[0.08] dark:bg-[#111]"
+                      style={{
+                        borderColor: isHovered ? `${skill.color}40` : "",
+                        boxShadow: isHovered
+                          ? `0 8px 30px ${skill.color}15`
+                          : "",
+                      }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={`https://cdn.simpleicons.org/${skill.icon}/${isHovered ? skill.color.replace("#", "") : "6b7280"}`}
+                        alt={skill.name}
+                        className="h-7 w-7 transition-transform duration-300 group-hover:scale-110 sm:h-8 sm:w-8"
+                        loading="lazy"
+                      />
+
+                      {/* Tooltip */}
+                      <div
+                        className="pointer-events-none absolute -top-10 left-1/2 z-10 -translate-x-1/2 rounded-lg px-3 py-1.5 text-xs font-medium whitespace-nowrap text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+                        style={{ backgroundColor: skill.color }}
+                      >
+                        {skill.name}
+                        <div
+                          className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent"
+                          style={{ borderTopColor: skill.color }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Name below icon */}
+                    <span className="text-[10px] font-medium text-neutral-400 transition-colors group-hover:text-neutral-600 sm:text-xs dark:text-slate-500 dark:group-hover:text-slate-300">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </SectionWrapper>
   );

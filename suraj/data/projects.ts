@@ -6,6 +6,7 @@ export interface Project {
   liveUrl?: string;
   sourceUrl?: string;
   featured: boolean;
+  gradient: string; // Gradient for the browser mockup placeholder
 }
 
 export const projects: Project[] = [
@@ -17,6 +18,7 @@ export const projects: Project[] = [
     liveUrl: "#",
     sourceUrl: "#",
     featured: true,
+    gradient: "from-violet-600 via-indigo-500 to-cyan-400",
   },
   {
     title: "Task Management App",
@@ -26,6 +28,7 @@ export const projects: Project[] = [
     liveUrl: "#",
     sourceUrl: "#",
     featured: true,
+    gradient: "from-orange-500 via-rose-500 to-pink-500",
   },
   {
     title: "AI Content Generator",
@@ -35,6 +38,7 @@ export const projects: Project[] = [
     liveUrl: "#",
     sourceUrl: "#",
     featured: false,
+    gradient: "from-emerald-500 via-teal-500 to-cyan-500",
   },
   {
     title: "Real-Time Chat App",
@@ -44,6 +48,7 @@ export const projects: Project[] = [
     liveUrl: "#",
     sourceUrl: "#",
     featured: false,
+    gradient: "from-blue-600 via-indigo-600 to-purple-600",
   },
   {
     title: "Portfolio Website",
@@ -53,6 +58,7 @@ export const projects: Project[] = [
     liveUrl: "#",
     sourceUrl: "#",
     featured: false,
+    gradient: "from-amber-500 via-orange-500 to-red-500",
   },
   {
     title: "Weather Dashboard",
@@ -62,5 +68,6 @@ export const projects: Project[] = [
     liveUrl: "#",
     sourceUrl: "#",
     featured: false,
+    gradient: "from-sky-400 via-blue-500 to-indigo-600",
   },
 ];

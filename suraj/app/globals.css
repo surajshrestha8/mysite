@@ -133,6 +133,7 @@ html {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -174,7 +175,7 @@ html {
 }
 
 .dark::-webkit-scrollbar-thumb {
-  background: #1e1e2e;
+  background: #333333;
 }
 
 /* Spotlight animation keyframe */
@@ -183,6 +184,7 @@ html {
     opacity: 0;
     transform: translate(-72%, -62%) scale(0.5);
   }
+
   100% {
     opacity: 1;
     transform: translate(-50%, -40%) scale(1);

@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/data/site-config";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { Preloader } from "@/components/ui/preloader";
+import { CommandPalette } from "@/components/ui/command-palette";
+import { ConsoleEasterEgg } from "@/components/ui/console-easter-egg";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 
@@ -48,6 +50,8 @@ export default function RootLayout({
           {children}
           <ScrollToTop />
           <Preloader />
+          <CommandPalette />
+          <ConsoleEasterEgg />
         </ThemeProvider>
       </body>
     </html>
