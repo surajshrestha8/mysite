@@ -41,7 +41,7 @@ export function Contact() {
           initial={{ opacity: 0.5, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-          className="bg-gradient-to-br from-white to-slate-400 bg-clip-text text-center text-3xl font-bold tracking-tight text-transparent sm:text-4xl md:text-5xl"
+          className="bg-gradient-to-br from-neutral-900 to-neutral-500 bg-clip-text text-center text-3xl font-bold tracking-tight text-transparent sm:text-4xl md:text-5xl dark:from-white dark:to-slate-400"
         >
           Let&apos;s Connect
         </motion.h2>
@@ -52,7 +52,7 @@ export function Contact() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="mb-8 max-w-md text-center text-lg text-slate-400 md:text-left"
+              className="mb-8 max-w-md text-center text-lg text-neutral-600 md:text-left dark:text-slate-400"
             >
               I&apos;m always open to new opportunities and collaborations.
               Whether you have a question or just want to say hi, I&apos;ll try
@@ -74,14 +74,16 @@ export function Contact() {
                     link.name === "Email" ? undefined : "noopener noreferrer"
                   }
                   whileHover={{ y: -4, scale: 1.02 }}
-                  className="glass flex items-center gap-4 rounded-xl border border-white/[0.1] bg-white/[0.02] p-4 transition-all hover:border-indigo-500/30 hover:bg-white/[0.05]"
+                  className="glass flex items-center gap-4 rounded-xl border border-black/[0.1] bg-black/[0.02] p-4 transition-all hover:border-indigo-500/30 hover:bg-black/[0.05] dark:border-white/[0.1] dark:bg-white/[0.02] dark:hover:bg-white/[0.05]"
                 >
-                  <link.icon className="h-5 w-5 text-indigo-400" />
+                  <link.icon className="h-5 w-5 text-indigo-500 dark:text-indigo-400" />
                   <div>
-                    <div className="text-sm font-medium text-white">
+                    <div className="text-sm font-medium text-neutral-900 dark:text-white">
                       {link.name}
                     </div>
-                    <div className="text-xs text-slate-500">{link.handle}</div>
+                    <div className="text-xs text-neutral-500 dark:text-slate-500">
+                      {link.handle}
+                    </div>
                   </div>
                 </motion.a>
               ))}

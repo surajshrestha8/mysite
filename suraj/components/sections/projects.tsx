@@ -13,10 +13,10 @@ export function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="mb-12 text-center text-3xl font-bold text-white sm:text-4xl"
+        className="mb-12 text-center text-3xl font-bold text-neutral-900 sm:text-4xl dark:text-white"
       >
         Featured{" "}
-        <span className="bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400">
           Projects
         </span>
       </motion.h2>
@@ -36,18 +36,18 @@ export function Projects() {
           >
             <div className="relative h-48 overflow-hidden bg-gradient-to-br from-indigo-500/10 to-purple-500/10">
               <div className="flex h-full items-center justify-center">
-                <span className="text-4xl font-bold text-indigo-400/30">
+                <span className="text-4xl font-bold text-indigo-500/30 dark:text-indigo-400/30">
                   {project.title[0]}
                 </span>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent dark:from-[#0a0a0a]" />
             </div>
 
             <div className="p-6">
-              <h3 className="mb-2 text-xl font-semibold text-white">
+              <h3 className="mb-2 text-xl font-semibold text-neutral-900 dark:text-white">
                 {project.title}
               </h3>
-              <p className="mb-4 text-sm leading-relaxed text-slate-400">
+              <p className="mb-4 text-sm leading-relaxed text-neutral-600 dark:text-slate-400">
                 {project.description}
               </p>
 
@@ -55,7 +55,7 @@ export function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-xs text-slate-400"
+                    className="rounded-full border border-black/[0.08] bg-black/[0.03] px-3 py-1 text-xs text-neutral-500 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-slate-400"
                   >
                     {tag}
                   </span>
@@ -79,7 +79,7 @@ export function Projects() {
                     href={project.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-slate-300"
+                    className="inline-flex items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-neutral-700 dark:text-slate-400 dark:hover:text-slate-300"
                   >
                     <Github className="h-4 w-4" />
                     Source Code

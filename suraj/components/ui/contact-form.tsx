@@ -34,12 +34,14 @@ export function ContactForm() {
   };
 
   return (
-    <div className="w-full max-w-xl rounded-2xl border border-white/[0.1] bg-black/50 p-6 backdrop-blur-sm md:p-8">
+    <div className="w-full max-w-xl rounded-2xl border border-black/[0.1] bg-white/50 p-6 backdrop-blur-sm md:p-8 dark:border-white/[0.1] dark:bg-black/50">
       <div className="mb-8 flex items-center justify-between">
-        <h3 className="text-xl font-semibold text-white">Send a message</h3>
+        <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">
+          Send a message
+        </h3>
         <button
           onClick={handleCopyEmail}
-          className="flex items-center gap-2 rounded-lg bg-white/[0.05] px-3 py-1.5 text-xs font-medium text-slate-300 transition-colors hover:bg-white/[0.1]"
+          className="flex items-center gap-2 rounded-lg bg-black/[0.05] px-3 py-1.5 text-xs font-medium text-neutral-600 transition-colors hover:bg-black/[0.1] dark:bg-white/[0.05] dark:text-slate-300 dark:hover:bg-white/[0.1]"
         >
           {copied ? (
             <>
@@ -59,7 +61,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="name"
-            className="mb-1.5 block text-sm font-medium text-slate-400"
+            className="mb-1.5 block text-sm font-medium text-neutral-500 dark:text-slate-400"
           >
             Name
           </label>
@@ -71,14 +73,14 @@ export function ContactForm() {
             onChange={(e) =>
               setFormState({ ...formState, name: e.target.value })
             }
-            className="w-full rounded-lg border border-white/[0.1] bg-white/[0.03] px-4 py-2.5 text-sm text-white placeholder-slate-500 transition-colors focus:border-indigo-500/50 focus:bg-white/[0.05] focus:ring-1 focus:ring-indigo-500/50 focus:outline-none"
+            className="w-full rounded-lg border border-black/[0.1] bg-black/[0.03] px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition-colors focus:border-indigo-500/50 focus:bg-black/[0.05] focus:ring-1 focus:ring-indigo-500/50 focus:outline-none dark:border-white/[0.1] dark:bg-white/[0.03] dark:text-white dark:placeholder-slate-500 dark:focus:bg-white/[0.05]"
             placeholder="John Doe"
           />
         </div>
         <div>
           <label
             htmlFor="email"
-            className="mb-1.5 block text-sm font-medium text-slate-400"
+            className="mb-1.5 block text-sm font-medium text-neutral-500 dark:text-slate-400"
           >
             Email
           </label>
@@ -90,14 +92,14 @@ export function ContactForm() {
             onChange={(e) =>
               setFormState({ ...formState, email: e.target.value })
             }
-            className="w-full rounded-lg border border-white/[0.1] bg-white/[0.03] px-4 py-2.5 text-sm text-white placeholder-slate-500 transition-colors focus:border-indigo-500/50 focus:bg-white/[0.05] focus:ring-1 focus:ring-indigo-500/50 focus:outline-none"
+            className="w-full rounded-lg border border-black/[0.1] bg-black/[0.03] px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition-colors focus:border-indigo-500/50 focus:bg-black/[0.05] focus:ring-1 focus:ring-indigo-500/50 focus:outline-none dark:border-white/[0.1] dark:bg-white/[0.03] dark:text-white dark:placeholder-slate-500 dark:focus:bg-white/[0.05]"
             placeholder="john@example.com"
           />
         </div>
         <div>
           <label
             htmlFor="message"
-            className="mb-1.5 block text-sm font-medium text-slate-400"
+            className="mb-1.5 block text-sm font-medium text-neutral-500 dark:text-slate-400"
           >
             Message
           </label>
@@ -109,7 +111,7 @@ export function ContactForm() {
             onChange={(e) =>
               setFormState({ ...formState, message: e.target.value })
             }
-            className="w-full resize-none rounded-lg border border-white/[0.1] bg-white/[0.03] px-4 py-2.5 text-sm text-white placeholder-slate-500 transition-colors focus:border-indigo-500/50 focus:bg-white/[0.05] focus:ring-1 focus:ring-indigo-500/50 focus:outline-none"
+            className="w-full resize-none rounded-lg border border-black/[0.1] bg-black/[0.03] px-4 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition-colors focus:border-indigo-500/50 focus:bg-black/[0.05] focus:ring-1 focus:ring-indigo-500/50 focus:outline-none dark:border-white/[0.1] dark:bg-white/[0.03] dark:text-white dark:placeholder-slate-500 dark:focus:bg-white/[0.05]"
             placeholder="Hi, I'd like to discuss a project..."
           />
         </div>

@@ -108,7 +108,7 @@ export const FloatingNav = ({
         <div className="flex items-center gap-4">
           <a
             href="#contact"
-            className="relative rounded-full border border-indigo-500/50 bg-indigo-500/10 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500/20"
+            className="relative rounded-full border border-indigo-500/50 bg-indigo-500/10 px-4 py-2 text-sm font-medium text-indigo-600 hover:bg-indigo-500/20 dark:text-white"
           >
             <span>Contact</span>
             <span className="absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
