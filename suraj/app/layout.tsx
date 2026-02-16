@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/data/site-config";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import { Preloader } from "@/components/ui/preloader";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
         >
           {children}
           <ScrollToTop />
+          <Preloader />
         </ThemeProvider>
       </body>
     </html>
