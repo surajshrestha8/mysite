@@ -35,11 +35,11 @@ export const experiences: Experience[] = [
     ],
   },
   {
-    title: "2018 - 2021",
+    title: "2019 - 2021",
     role: "Wordpress Developer",
     company: "Aankhijhyal Technologies",
     companyUrl: "#",
-    period: "2022 - 2023",
+    period: "2019 - 2021",
     description:
       "Started my professional career building websites using  wordpress for clients from different places of Nepal.",
     highlights: [

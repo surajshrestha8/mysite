@@ -93,12 +93,9 @@ export function Skills() {
                           : "",
                       }}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`https://cdn.simpleicons.org/${skill.icon}/${isHovered ? skill.color.replace("#", "") : "6b7280"}`}
-                        alt={skill.name}
+                      <skill.icon
                         className="h-7 w-7 transition-transform duration-300 group-hover:scale-110 sm:h-8 sm:w-8"
-                        loading="lazy"
+                        style={{ color: isHovered ? skill.color : undefined }}
                       />
 
                       {/* Tooltip */}

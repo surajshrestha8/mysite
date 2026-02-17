@@ -51,11 +51,11 @@ export const projects: Project[] = [
     gradient: "from-blue-600 via-indigo-600 to-purple-600",
   },
   {
-    title: "Portfolio Website",
+    title: "Travel Website",
     description:
       "This very portfolio website built with Next.js, Tailwind CSS, and Framer Motion with a focus on performance and animations.",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
-    liveUrl: "#",
+    liveUrl: "https://greengetaways.vercel.app/",
     sourceUrl: "#",
     featured: false,
     gradient: "from-amber-500 via-orange-500 to-red-500",
