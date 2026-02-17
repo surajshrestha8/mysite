@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard diff HEAD~10..HEAD --name-only)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard log --all --oneline --graph --decorate)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard rev-parse HEAD)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/ diff --stat main HEAD --)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/ status)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard show ddb5972:suraj/app/layout.tsx)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard show 309c66e --name-only --pretty=\"\")",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard show:*)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard diff 7878eed^..7878eed --name-only)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard log --all --oneline --decorate)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard status)",
+      "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard log --oneline -1 --format=\"%H %s\")",
+      "Bash(xargs -I {} sh -c 'echo \"\"=== COMMIT: {} ===\"\" && git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard show {} --stat')",
+      "Bash(npm install:*)"
+    ]
+  }
+}
