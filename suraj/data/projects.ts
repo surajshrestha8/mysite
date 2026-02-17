@@ -21,13 +21,14 @@ export const projects: Project[] = [
     gradient: "from-violet-600 via-indigo-500 to-cyan-400",
   },
   {
-    title: "Task Management App",
-    description:
-      "A collaborative project management tool with real-time updates, drag-and-drop boards, and team workspace features.",
-    tags: ["React", "Node.js", "Socket.io", "MongoDB", "Tailwind CSS"],
-    liveUrl: "#",
-    sourceUrl: "#",
+    title: "Saas Dashboard",
+    description: "A comprehensive SaaS dashboard with analytics",
+    tags: ["React", "Next JS", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://dashboard-lyart-three-78.vercel.app/",
+    sourceUrl:
+      "https://github.com/surajshrestha8/mysite/tree/main/dashboard/dashboard",
     featured: true,
+    image: "/images/projects/saas.png",
     gradient: "from-orange-500 via-rose-500 to-pink-500",
   },
   {
@@ -57,7 +58,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "Tailwind CSS", "Payload CMS", "TypeScript"],
     liveUrl: "https://greengetaways.vercel.app/",
     sourceUrl: "https://github.com/surajshrestha8/greengetaways",
-    image: "/greengetaways.png",
+    image: "/images/projects/greengetaways.png",
     featured: false,
     gradient: "from-amber-500 via-orange-500 to-red-500",
   },
