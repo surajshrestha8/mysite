@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/layout/header";
 import { ChartCard } from "@/components/dashboard/chart-card";
-import { monthlyData, trafficSources } from "@/data/mock/analytics";
+import { monthlyData, trafficSources, countryData } from "@/data/mock/analytics";
 import {
   LineChart,
   Line,
@@ -35,6 +35,7 @@ function useChartColors() {
 
 const formatCurrency = (v: number) => `$${(v / 1000).toFixed(0)}k`;
 const formatDollar = (v: number) => `$${v.toLocaleString()}`;
+const formatRevenue = (v: number) => `$${v.toLocaleString()}`;
 
 type DateRange = "3M" | "6M" | "12M";
 
@@ -215,6 +216,72 @@ export default function AnalyticsPage() {
             </div>
           </ChartCard>
         </div>
+
+        {/* Top Countries */}
+        <ChartCard title="Top Countries" subtitle="User distribution by country">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            {/* Left: ranked bar list */}
+            <div className="space-y-3">
+              {countryData.map((c, i) => (
+                <div key={c.country} className="flex items-center gap-3">
+                  <span className="w-4 text-xs text-muted-foreground text-right">{i + 1}</span>
+                  <span className="text-base leading-none">{c.flag}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm font-medium text-foreground truncate">{c.country}</span>
+                      <span className="text-xs text-muted-foreground ml-2 flex-shrink-0">
+                        {c.users.toLocaleString()} · {c.percentage}%
+                      </span>
+                    </div>
+                    <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all"
+                        style={{ width: `${c.percentage}%`, background: c.color }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: donut chart */}
+            <div className="flex flex-col items-center justify-center">
+              <ResponsiveContainer width="100%" height={260}>
+                <PieChart>
+                  <Pie
+                    data={countryData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={70}
+                    outerRadius={110}
+                    paddingAngle={2}
+                    dataKey="percentage"
+                  >
+                    {countryData.map((entry, index) => (
+                      <Cell key={index} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(v, name, props) => [
+                      `${props.payload.percentage}% · ${props.payload.users.toLocaleString()} users`,
+                      props.payload.country,
+                    ]}
+                    contentStyle={{
+                      background: "hsl(var(--card))",
+                      border: "1px solid hsl(var(--border))",
+                      borderRadius: "8px",
+                      color: "hsl(var(--foreground))",
+                      fontSize: "12px",
+                    }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+              <p className="text-xs text-muted-foreground -mt-4">Top 10 countries · 85% of users</p>
+            </div>
+
+          </div>
+        </ChartCard>
       </div>
     </>
   );

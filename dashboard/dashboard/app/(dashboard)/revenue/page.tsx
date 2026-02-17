@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/layout/header";
 import { ChartCard } from "@/components/dashboard/chart-card";
-import { revenueMetrics, planRevenue, monthlyRevenue, topCustomers } from "@/data/mock/revenue";
+import { revenueMetrics, planRevenue, monthlyRevenue, topCustomers, mrrMovement } from "@/data/mock/revenue";
 import {
   BarChart,
   Bar,
@@ -140,6 +140,64 @@ export default function RevenuePage() {
               <Bar dataKey="starter" name="Starter" stackId="a" fill="#3b82f6" />
               <Bar dataKey="pro" name="Pro" stackId="a" fill="#8b5cf6" />
               <Bar dataKey="enterprise" name="Enterprise" stackId="a" fill="#10b981" radius={[3, 3, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartCard>
+
+        {/* MRR Movement waterfall */}
+        <ChartCard
+          title="MRR Movement"
+          subtitle="New and expansion MRR vs contraction and churn each month"
+        >
+          {/* Legend */}
+          <div className="flex flex-wrap items-center gap-4 mb-4">
+            {[
+              { color: "#10b981", label: "New MRR" },
+              { color: "#06b6d4", label: "Expansion" },
+              { color: "#f97316", label: "Contraction" },
+              { color: "#ef4444", label: "Churn" },
+            ].map(({ color, label }) => (
+              <div key={label} className="flex items-center gap-1.5">
+                <div className="h-2.5 w-2.5 rounded-sm flex-shrink-0" style={{ background: color }} />
+                <span className="text-xs text-muted-foreground">{label}</span>
+              </div>
+            ))}
+          </div>
+          <ResponsiveContainer width="100%" height={280}>
+            <BarChart data={mrrMovement} margin={{ top: 5, right: 10, left: 0, bottom: 5 }} barGap={2}>
+              <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
+              <XAxis
+                dataKey="month"
+                tick={{ fill: colors.text, fontSize: 11 }}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                tickFormatter={(v) => `$${(Math.abs(v) / 1000).toFixed(0)}k`}
+                tick={{ fill: colors.text, fontSize: 11 }}
+                tickLine={false}
+                axisLine={false}
+                width={45}
+              />
+              <Tooltip
+                formatter={(v, name) => {
+                  const val = Number(v);
+                  return [`${val < 0 ? "-" : "+"}$${Math.abs(val).toLocaleString()}`, String(name)];
+                }}
+                contentStyle={{
+                  background: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "8px",
+                  color: "hsl(var(--foreground))",
+                  fontSize: "12px",
+                }}
+              />
+              {/* Positive bars stack upward */}
+              <Bar dataKey="new"       name="New MRR"    stackId="pos" fill="#10b981" />
+              <Bar dataKey="expansion" name="Expansion"  stackId="pos" fill="#06b6d4" radius={[3, 3, 0, 0]} />
+              {/* Negative bars stack downward */}
+              <Bar dataKey="contraction" name="Contraction" stackId="neg" fill="#f97316" />
+              <Bar dataKey="churn"       name="Churn"        stackId="neg" fill="#ef4444" radius={[0, 0, 3, 3]} />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>

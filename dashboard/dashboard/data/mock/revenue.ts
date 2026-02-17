@@ -55,6 +55,25 @@ export const monthlyRevenue: MonthlyRevenue[] = [
   { month: "Jan '25", starter: 5400, pro: 21800, enterprise: 21095 },
 ];
 
+export interface MrrMovement {
+  month: string;
+  new: number;
+  expansion: number;
+  contraction: number;
+  churn: number;
+}
+
+export const mrrMovement: MrrMovement[] = [
+  { month: "Jun '24", new: 3600, expansion: 900,  contraction: -1000, churn: -1000 },
+  { month: "Jul '24", new: 3000, expansion: 700,  contraction: -2000, churn: -2400 },
+  { month: "Aug '24", new: 4200, expansion: 1100, contraction:  -900, churn:  -900 },
+  { month: "Sep '24", new: 3500, expansion: 900,  contraction: -1200, churn:  -900 },
+  { month: "Oct '24", new: 2800, expansion: 600,  contraction: -2400, churn: -2500 },
+  { month: "Nov '24", new: 5200, expansion: 1200, contraction: -1200, churn: -1400 },
+  { month: "Dec '24", new: 4100, expansion: 900,  contraction: -1400, churn: -1300 },
+  { month: "Jan '25", new: 4800, expansion: 1100, contraction: -1600, churn: -1805 },
+];
+
 export const topCustomers: TopCustomer[] = [
   { rank: 1, name: "Sarah Johnson", company: "Acme Corp", plan: "Enterprise", mrr: 899, avatarInitials: "SJ", avatarColor: "#3b82f6" },
   { rank: 2, name: "James Wilson", company: "CloudBase", plan: "Enterprise", mrr: 899, avatarInitials: "JW", avatarColor: "#f59e0b" },

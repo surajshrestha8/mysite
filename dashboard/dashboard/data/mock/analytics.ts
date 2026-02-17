@@ -41,3 +41,25 @@ export const conversionData = [
   { month: "Dec '24", rate: 4.4 },
   { month: "Jan '25", rate: 4.7 },
 ];
+
+export interface CountryData {
+  country: string;
+  flag: string;
+  users: number;
+  revenue: number;
+  percentage: number;
+  color: string;
+}
+
+export const countryData: CountryData[] = [
+  { country: "United States", flag: "🇺🇸", users: 1082, revenue: 18340, percentage: 38, color: "#3b82f6" },
+  { country: "United Kingdom", flag: "🇬🇧", users:  342, revenue:  5820, percentage: 12, color: "#8b5cf6" },
+  { country: "Germany",        flag: "🇩🇪", users:  256, revenue:  4350, percentage:  9, color: "#10b981" },
+  { country: "Canada",         flag: "🇨🇦", users:  199, revenue:  3380, percentage:  7, color: "#f59e0b" },
+  { country: "France",         flag: "🇫🇷", users:  171, revenue:  2910, percentage:  6, color: "#ef4444" },
+  { country: "Australia",      flag: "🇦🇺", users:  142, revenue:  2410, percentage:  5, color: "#06b6d4" },
+  { country: "India",          flag: "🇮🇳", users:  142, revenue:  1820, percentage:  5, color: "#ec4899" },
+  { country: "Netherlands",    flag: "🇳🇱", users:  114, revenue:  1940, percentage:  4, color: "#f97316" },
+  { country: "Brazil",         flag: "🇧🇷", users:   85, revenue:  1020, percentage:  3, color: "#a855f7" },
+  { country: "Japan",          flag: "🇯🇵", users:   85, revenue:  1430, percentage:  3, color: "#14b8a6" },
+];

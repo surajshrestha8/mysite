@@ -4,6 +4,7 @@ import { Bell, Search, User, CreditCard, LogOut } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { useState, useEffect, useRef } from "react";
 import { NotificationsPanel } from "./notifications-panel";
+import { CommandPalette } from "./command-palette";
 import { initialNotifications, Notification } from "@/data/mock/notifications";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +20,7 @@ const avatarMenuItems = [
 
 export function Header({ title, subtitle }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>(initialNotifications);
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -34,6 +36,18 @@ export function Header({ title, subtitle }: HeaderProps) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
+
+  // Command palette: open on Cmd+K / Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setIsCommandOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   // Notifications: scroll lock
   useEffect(() => {
@@ -79,11 +93,17 @@ export function Header({ title, subtitle }: HeaderProps) {
 
         {/* Right: search, notifications, theme, avatar */}
         <div className="flex items-center gap-2">
-          {/* Search */}
-          <div className="hidden sm:flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-1.5 text-sm text-muted-foreground w-48 lg:w-64">
+          {/* Search — opens command palette */}
+          <button
+            onClick={() => setIsCommandOpen(true)}
+            className="hidden sm:flex items-center gap-2 rounded-md border border-border bg-muted px-3 py-1.5 text-sm text-muted-foreground w-48 lg:w-64 hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
             <Search size={14} />
-            <span>Search...</span>
-          </div>
+            <span className="flex-1 text-left">Search...</span>
+            <kbd className="inline-flex items-center gap-0.5 rounded border border-border bg-background px-1.5 py-0.5 text-[10px] font-mono">
+              ⌘K
+            </kbd>
+          </button>
 
           {/* Notifications */}
           <button
@@ -115,7 +135,7 @@ export function Header({ title, subtitle }: HeaderProps) {
                 isAvatarOpen && "opacity-80"
               )}
             >
-              SJ
+              SS
             </button>
 
             {/* Dropdown menu */}
@@ -123,7 +143,7 @@ export function Header({ title, subtitle }: HeaderProps) {
               <div className="absolute right-0 top-full mt-2 w-52 rounded-lg border border-border bg-card shadow-lg z-50 overflow-hidden">
                 {/* User info header */}
                 <div className="px-4 py-3 border-b border-border">
-                  <p className="text-sm font-medium text-foreground">Suraj J</p>
+                  <p className="text-sm font-medium text-foreground">Suraj Shrestha</p>
                   <p className="text-xs text-muted-foreground truncate">suraj@example.com</p>
                 </div>
 
@@ -162,6 +182,11 @@ export function Header({ title, subtitle }: HeaderProps) {
         notifications={notifications}
         onClose={() => setIsOpen(false)}
         onMarkAllRead={handleMarkAllRead}
+      />
+
+      <CommandPalette
+        isOpen={isCommandOpen}
+        onClose={() => setIsCommandOpen(false)}
       />
     </>
   );
