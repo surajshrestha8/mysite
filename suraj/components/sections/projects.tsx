@@ -9,10 +9,12 @@ function BrowserMockup({
   title,
   gradient,
   url,
+  image,
 }: {
   title: string;
   gradient: string;
   url?: string;
+  image?: string;
 }) {
   return (
     <div className="overflow-hidden rounded-t-xl border border-b-0 border-black/[0.06] bg-neutral-100 dark:border-white/[0.08] dark:bg-[#1a1a1a]">
@@ -45,30 +47,43 @@ function BrowserMockup({
 
       {/* Website preview area */}
       <div className="relative h-48 overflow-hidden sm:h-56">
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-90`}
-        />
-        {/* Fake UI elements */}
-        <div className="relative flex h-full flex-col p-6">
-          {/* Fake navbar */}
-          <div className="flex items-center justify-between">
-            <div className="h-2.5 w-16 rounded-full bg-white/30" />
-            <div className="flex gap-3">
-              <div className="h-2 w-10 rounded-full bg-white/20" />
-              <div className="h-2 w-10 rounded-full bg-white/20" />
-              <div className="h-2 w-10 rounded-full bg-white/20" />
+        {image ? (
+          // Use img tag for simplicity or verify if next/image is available. Project likely uses standard img or has next/image.
+          // Using standard img as user hasn't specified image optimization preference and simpler for now.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-cover object-top"
+          />
+        ) : (
+          <>
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-90`}
+            />
+            {/* Fake UI elements */}
+            <div className="relative flex h-full flex-col p-6">
+              {/* Fake navbar */}
+              <div className="flex items-center justify-between">
+                <div className="h-2.5 w-16 rounded-full bg-white/30" />
+                <div className="flex gap-3">
+                  <div className="h-2 w-10 rounded-full bg-white/20" />
+                  <div className="h-2 w-10 rounded-full bg-white/20" />
+                  <div className="h-2 w-10 rounded-full bg-white/20" />
+                </div>
+              </div>
+              {/* Fake hero content */}
+              <div className="mt-auto space-y-3">
+                <div className="h-4 w-3/4 rounded-full bg-white/30" />
+                <div className="h-3 w-1/2 rounded-full bg-white/20" />
+                <div className="flex gap-2 pt-1">
+                  <div className="h-6 w-20 rounded-md bg-white/25" />
+                  <div className="h-6 w-16 rounded-md bg-white/15" />
+                </div>
+              </div>
             </div>
-          </div>
-          {/* Fake hero content */}
-          <div className="mt-auto space-y-3">
-            <div className="h-4 w-3/4 rounded-full bg-white/30" />
-            <div className="h-3 w-1/2 rounded-full bg-white/20" />
-            <div className="flex gap-2 pt-1">
-              <div className="h-6 w-20 rounded-md bg-white/25" />
-              <div className="h-6 w-16 rounded-md bg-white/15" />
-            </div>
-          </div>
-        </div>
+          </>
+        )}
         {/* Hover overlay */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/20 group-hover:opacity-100">
           <div className="flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 font-medium text-neutral-900 shadow-xl backdrop-blur-sm">
@@ -125,6 +140,7 @@ export function Projects() {
                     title={project.title}
                     gradient={project.gradient}
                     url={project.liveUrl !== "#" ? project.liveUrl : undefined}
+                    image={project.image}
                   />
                   <div className="flex flex-col justify-center p-6 md:p-8">
                     <h3 className="mb-2 text-xl font-semibold text-neutral-900 dark:text-white">
@@ -175,6 +191,7 @@ export function Projects() {
                     title={project.title}
                     gradient={project.gradient}
                     url={project.liveUrl !== "#" ? project.liveUrl : undefined}
+                    image={project.image}
                   />
                   <div className="p-6">
                     <h3 className="mb-2 text-lg font-semibold text-neutral-900 dark:text-white">

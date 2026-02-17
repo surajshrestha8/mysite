@@ -10,7 +10,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   Frontend: <Code2 className="h-5 w-5" />,
   Backend: <Server className="h-5 w-5" />,
   Database: <Database className="h-5 w-5" />,
-  "Tools & DevOps": <Wrench className="h-5 w-5" />,
+  Tools: <Wrench className="h-5 w-5" />,
 };
 
 export function Skills() {

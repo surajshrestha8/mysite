@@ -14,6 +14,9 @@ import {
   SiSupabase,
   SiGit,
   SiVercel,
+  SiPayloadcms,
+  SiAmazon,
+  SiAmazonwebservices,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -50,6 +53,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E" },
       { name: "Express", icon: SiExpress, color: "#000000" },
       { name: "Prisma", icon: SiPrisma, color: "#2D3748" },
+      { name: "Payload CMS", icon: SiPayloadcms, color: "#2D3748" },
     ],
   },
   {
@@ -62,9 +66,10 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Tools & DevOps",
+    title: "Tools",
     description: "Development workflow and deployment",
     skills: [
+      { name: "AWS", icon: SiAmazonwebservices, color: "#FF9900" },
       { name: "Git", icon: SiGit, color: "#F05032" },
       { name: "Vercel", icon: SiVercel, color: "#000000" },
       { name: "VS Code", icon: VscVscode, color: "#007ACC" },

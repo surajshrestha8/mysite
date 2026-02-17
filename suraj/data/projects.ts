@@ -53,10 +53,11 @@ export const projects: Project[] = [
   {
     title: "Travel Website",
     description:
-      "This very portfolio website built with Next.js, Tailwind CSS, and Framer Motion with a focus on performance and animations.",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
+      "This very travel  website built with Next.js, Tailwind CSS, and Payload CMS with a focus on performance and animations.",
+    tags: ["Next.js", "Tailwind CSS", "Payload CMS", "TypeScript"],
     liveUrl: "https://greengetaways.vercel.app/",
-    sourceUrl: "#",
+    sourceUrl: "https://github.com/surajshrestha8/greengetaways",
+    image: "/greengetaways.png",
     featured: false,
     gradient: "from-amber-500 via-orange-500 to-red-500",
   },
