@@ -20,6 +20,7 @@ import {
 } from "recharts";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 function useChartColors() {
   const { resolvedTheme } = useTheme();
@@ -35,20 +36,65 @@ function useChartColors() {
 const formatCurrency = (v: number) => `$${(v / 1000).toFixed(0)}k`;
 const formatDollar = (v: number) => `$${v.toLocaleString()}`;
 
+type DateRange = "3M" | "6M" | "12M";
+
+const RANGES = [
+  { label: "3M" as const, months: 3 },
+  { label: "6M" as const, months: 6 },
+  { label: "12M" as const, months: 12 },
+];
+
+function RangePicker({
+  value,
+  onChange,
+}: {
+  value: DateRange;
+  onChange: (v: DateRange) => void;
+}) {
+  return (
+    <div className="flex items-center gap-0.5 rounded-lg bg-muted p-0.5">
+      {RANGES.map((r) => (
+        <button
+          key={r.label}
+          onClick={() => onChange(r.label)}
+          className={cn(
+            "rounded-md px-3 py-1 text-xs font-medium transition-all",
+            value === r.label
+              ? "bg-background text-foreground shadow-sm"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          {r.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function AnalyticsPage() {
   const colors = useChartColors();
+  const [range, setRange] = useState<DateRange>("12M");
+  const filteredData = monthlyData.slice(-(RANGES.find((r) => r.label === range)!.months));
 
   return (
     <>
       <Header title="Analytics" subtitle="Trends and performance over the last 12 months" />
       <div className="p-4 lg:p-6 space-y-4">
+        {/* Date range filter row */}
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-muted-foreground">
+            Showing last <span className="font-medium text-foreground">{range}</span>
+          </p>
+          <RangePicker value={range} onChange={setRange} />
+        </div>
+
         {/* Revenue Line Chart */}
         <ChartCard
           title="Monthly Revenue"
           subtitle="Total revenue collected each month"
         >
           <ResponsiveContainer width="100%" height={280}>
-            <LineChart data={monthlyData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+            <LineChart data={filteredData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
               <XAxis
                 dataKey="month"
@@ -93,7 +139,7 @@ export default function AnalyticsPage() {
             subtitle="New signups vs churned users per month"
           >
             <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={monthlyData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }} barGap={4}>
+              <BarChart data={filteredData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }} barGap={4}>
                 <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
                 <XAxis
                   dataKey="month"
