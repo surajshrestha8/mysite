@@ -14,7 +14,8 @@
       "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard status)",
       "Bash(git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard log --oneline -1 --format=\"%H %s\")",
       "Bash(xargs -I {} sh -c 'echo \"\"=== COMMIT: {} ===\"\" && git -C /c/Users/manju/Desktop/suraj/dashboard/dashboard show {} --stat')",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }
