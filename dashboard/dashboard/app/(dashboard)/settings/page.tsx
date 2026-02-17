@@ -66,10 +66,10 @@ export default function SettingsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { label: "Full Name", value: "Suraj Johnson", type: "text" },
-              { label: "Email", value: "suraj@saas-company.io", type: "email" },
+              { label: "Full Name", value: "Suraj Shrestha", type: "text" },
+              { label: "Email", value: "firminosuraj1892@gmail.com", type: "email" },
               { label: "Role", value: "Admin", type: "text" },
-              { label: "Company", value: "SaasDash Inc.", type: "text" },
+              { label: "Company", value: "Dashboard", type: "text" },
             ].map(({ label, value, type }) => (
               <div key={label}>
                 <label className="block text-xs font-medium text-muted-foreground mb-1.5">
