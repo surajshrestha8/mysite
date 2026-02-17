@@ -188,12 +188,12 @@ export function About() {
               {punctuation(",")}
             </CodeLine>
 
-            <CodeLine lineNumber={5} delay={0.3}>
+            {/* <CodeLine lineNumber={5} delay={0.3}>
               {"  "}
               {property("available")}
               {punctuation(":")} {keyword("true")}
               {punctuation(",")} {comment("open to opportunities")}
-            </CodeLine>
+            </CodeLine> */}
 
             <CodeLine lineNumber={6} delay={0.35}>
               &nbsp;
@@ -280,6 +280,7 @@ export function About() {
               {string("clean code")}
               {punctuation(",")} {string("hiking")}
               {punctuation(",")} {string("new tech")}
+              {punctuation(",")} {string("football")}
               {bracket("]")}
               {punctuation(",")}
             </CodeLine>

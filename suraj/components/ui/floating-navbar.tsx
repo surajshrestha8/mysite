@@ -66,30 +66,24 @@ export const FloatingNav = ({
           key={`link=${idx}`}
           href={navItem.link}
           className={cn(
-            "relative flex items-center space-x-1 text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white",
-            activeSection === navItem.link &&
-              "text-indigo-500 dark:text-indigo-400",
+            "relative flex items-center space-x-1 rounded-full px-4 py-2 text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white",
+            activeSection === navItem.link && "text-indigo-600 dark:text-white",
           )}
         >
-          <span className="block sm:hidden">{navItem.icon}</span>
-          <span className="hidden text-sm sm:block">{navItem.name}</span>
+          <span className="relative z-20 block sm:hidden">{navItem.icon}</span>
+          <span className="relative z-20 hidden text-sm sm:block">
+            {navItem.name}
+          </span>
           {activeSection === navItem.link && (
             <motion.span
               layoutId="activeNav"
-              className="absolute inset-x-0 -bottom-1 mx-auto h-0.5 rounded-full bg-indigo-500"
+              className="absolute inset-0 rounded-full border border-indigo-500/50 bg-indigo-500/10"
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             />
           )}
         </a>
       ))}
       <div className="flex items-center gap-3">
-        <a
-          href="#contact"
-          className="relative rounded-full border border-indigo-500/50 bg-indigo-500/10 px-4 py-2 text-sm font-medium text-indigo-600 transition-colors hover:bg-indigo-500/20 dark:text-white"
-        >
-          <span>Contact</span>
-          <span className="absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-        </a>
         <ModeToggle />
       </div>
     </motion.div>
