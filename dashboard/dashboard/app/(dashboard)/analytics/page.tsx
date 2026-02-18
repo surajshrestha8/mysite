@@ -93,6 +93,11 @@ export default function AnalyticsPage() {
         <ChartCard
           title="Monthly Revenue"
           subtitle="Total revenue collected each month"
+          exportData={{
+            filename: "monthly-revenue.csv",
+            headers: ["Month", "Revenue", "New Users", "Churned"],
+            rows: filteredData.map((d) => [d.month, d.revenue, d.newUsers, d.churned]),
+          }}
         >
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={filteredData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
@@ -138,6 +143,11 @@ export default function AnalyticsPage() {
           <ChartCard
             title="User Growth"
             subtitle="New signups vs churned users per month"
+            exportData={{
+              filename: "user-growth.csv",
+              headers: ["Month", "New Users", "Churned"],
+              rows: filteredData.map((d) => [d.month, d.newUsers, d.churned]),
+            }}
           >
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={filteredData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }} barGap={4}>

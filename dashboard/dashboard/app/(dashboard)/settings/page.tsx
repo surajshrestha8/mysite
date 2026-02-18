@@ -53,7 +53,7 @@ export default function SettingsPage() {
           <h2 className="text-base font-semibold text-foreground mb-5">Profile</h2>
           <div className="flex items-start gap-5 mb-6">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground text-xl font-bold flex-shrink-0">
-              SJ
+              SS
             </div>
             <div>
               <p className="text-sm font-medium text-foreground">Profile photo</p>

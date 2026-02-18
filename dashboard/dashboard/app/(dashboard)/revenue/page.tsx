@@ -109,6 +109,11 @@ export default function RevenuePage() {
         <ChartCard
           title="Revenue by Month"
           subtitle="Breakdown by subscription tier (stacked)"
+          exportData={{
+            filename: "revenue-by-month.csv",
+            headers: ["Month", "Starter", "Pro", "Enterprise"],
+            rows: monthlyRevenue.map((d) => [d.month, d.starter, d.pro, d.enterprise]),
+          }}
         >
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={monthlyRevenue} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>

@@ -1,11 +1,21 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { Customer, Plan, Status } from "@/data/mock/customers";
 import { Badge } from "@/components/ui/badge";
-import { ChevronUp, ChevronDown, ChevronsUpDown, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronUp,
+  ChevronDown,
+  ChevronsUpDown,
+  Search,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+} from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { toCSV, triggerDownload } from "@/lib/export";
 
 type SortField = "name" | "plan" | "status" | "mrr" | "joined";
 type SortDir = "asc" | "desc";
@@ -50,7 +60,10 @@ export function DataTable({ customers }: DataTableProps) {
     return customers
       .filter((c) => {
         const q = search.toLowerCase();
-        const matchSearch = c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || c.company.toLowerCase().includes(q);
+        const matchSearch =
+          c.name.toLowerCase().includes(q) ||
+          c.email.toLowerCase().includes(q) ||
+          c.company.toLowerCase().includes(q);
         const matchPlan = filterPlan === "All" || c.plan === filterPlan;
         const matchStatus = filterStatus === "All" || c.status === filterStatus;
         return matchSearch && matchPlan && matchStatus;
@@ -58,7 +71,10 @@ export function DataTable({ customers }: DataTableProps) {
       .sort((a, b) => {
         let av: string | number = a[sortField];
         let bv: string | number = b[sortField];
-        if (sortField === "mrr") { av = a.mrr; bv = b.mrr; }
+        if (sortField === "mrr") {
+          av = a.mrr;
+          bv = b.mrr;
+        }
         if (typeof av === "string") av = av.toLowerCase();
         if (typeof bv === "string") bv = bv.toLowerCase();
         if (av < bv) return sortDir === "asc" ? -1 : 1;
@@ -70,11 +86,30 @@ export function DataTable({ customers }: DataTableProps) {
   const totalPages = Math.ceil(filtered.length / ROWS_PER_PAGE);
   const paginated = filtered.slice((page - 1) * ROWS_PER_PAGE, page * ROWS_PER_PAGE);
 
+  const handleExportCSV = () => {
+    const headers = ["ID", "Name", "Email", "Company", "Plan", "Status", "MRR", "Joined"];
+    const rows = customers.map((c) => [
+      c.id,
+      c.name,
+      c.email,
+      c.company,
+      c.plan,
+      c.status,
+      c.mrr,
+      c.joined,
+    ]);
+    const csv = toCSV(headers, rows);
+    triggerDownload("customers.csv", csv);
+  };
+
   const SortIcon = ({ field }: { field: SortField }) => {
-    if (sortField !== field) return <ChevronsUpDown size={13} className="text-muted-foreground" />;
-    return sortDir === "asc"
-      ? <ChevronUp size={13} className="text-primary" />
-      : <ChevronDown size={13} className="text-primary" />;
+    if (sortField !== field)
+      return <ChevronsUpDown size={13} className="text-muted-foreground" />;
+    return sortDir === "asc" ? (
+      <ChevronUp size={13} className="text-primary" />
+    ) : (
+      <ChevronDown size={13} className="text-primary" />
+    );
   };
 
   return (
@@ -87,7 +122,10 @@ export function DataTable({ customers }: DataTableProps) {
             type="text"
             placeholder="Search name, email, company..."
             value={search}
-            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
             className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground text-sm"
           />
         </div>
@@ -95,7 +133,10 @@ export function DataTable({ customers }: DataTableProps) {
         <div className="flex items-center gap-2">
           <select
             value={filterPlan}
-            onChange={(e) => { setFilterPlan(e.target.value as Plan | "All"); setPage(1); }}
+            onChange={(e) => {
+              setFilterPlan(e.target.value as Plan | "All");
+              setPage(1);
+            }}
             className="h-9 rounded-md border border-border bg-background px-2 text-sm text-foreground outline-none cursor-pointer"
           >
             <option value="All">All Plans</option>
@@ -106,7 +147,10 @@ export function DataTable({ customers }: DataTableProps) {
 
           <select
             value={filterStatus}
-            onChange={(e) => { setFilterStatus(e.target.value as Status | "All"); setPage(1); }}
+            onChange={(e) => {
+              setFilterStatus(e.target.value as Status | "All");
+              setPage(1);
+            }}
             className="h-9 rounded-md border border-border bg-background px-2 text-sm text-foreground outline-none cursor-pointer"
           >
             <option value="All">All Status</option>
@@ -116,9 +160,19 @@ export function DataTable({ customers }: DataTableProps) {
           </select>
         </div>
 
-        <span className="text-xs text-muted-foreground ml-auto">
-          {filtered.length} customers
-        </span>
+        <div className="flex items-center gap-2 ml-auto">
+          <span className="text-xs text-muted-foreground">
+            {filtered.length} customers
+          </span>
+          <button
+            onClick={handleExportCSV}
+            title="Export all customers as CSV"
+            className="flex items-center gap-1.5 h-9 rounded-md border border-border bg-background px-3 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
+            <Download size={13} />
+            Export CSV
+          </button>
+        </div>
       </div>
 
       {/* Table */}
@@ -171,15 +225,24 @@ export function DataTable({ customers }: DataTableProps) {
           <tbody className="divide-y divide-border">
             {paginated.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-4 py-12 text-center text-muted-foreground text-sm">
+                <td
+                  colSpan={5}
+                  className="px-4 py-12 text-center text-muted-foreground text-sm"
+                >
                   No customers match your search.
                 </td>
               </tr>
             ) : (
               paginated.map((c) => (
-                <tr key={c.id} className="hover:bg-muted/40 transition-colors">
+                <tr
+                  key={c.id}
+                  className="hover:bg-muted/40 transition-colors cursor-pointer"
+                >
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-3">
+                    <Link
+                      href={`/customers/${c.id}`}
+                      className="flex items-center gap-3"
+                    >
                       <div
                         className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white"
                         style={{ background: c.avatarColor }}
@@ -190,7 +253,7 @@ export function DataTable({ customers }: DataTableProps) {
                         <p className="font-medium text-foreground">{c.name}</p>
                         <p className="text-xs text-muted-foreground">{c.email}</p>
                       </div>
-                    </div>
+                    </Link>
                   </td>
                   <td className="px-4 py-3">
                     <Badge variant={planVariant[c.plan]}>{c.plan}</Badge>
