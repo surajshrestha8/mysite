@@ -9,7 +9,7 @@ function WordsRenderer({
   filter,
 }: {
   wordsArray: string[];
-  scope: React.RefObject<HTMLElement>;
+  scope: React.RefObject<HTMLDivElement>;
   filter: boolean;
 }) {
   return (
@@ -38,7 +38,7 @@ export const TextGenerateEffect = ({
   filter?: boolean;
   duration?: number;
 }) => {
-  const [scope, animate] = useAnimate();
+  const [scope, animate] = useAnimate<HTMLDivElement>();
   const wordsArray = words.split(" ");
 
   useEffect(() => {

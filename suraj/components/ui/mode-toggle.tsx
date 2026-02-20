@@ -20,7 +20,7 @@ export function ModeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-800 transition-colors hover:bg-neutral-100 dark:border-white/[0.2] dark:bg-black dark:text-neutral-200 dark:hover:bg-neutral-900"
+      className="relative flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-800 transition-colors hover:bg-neutral-100 dark:border-white/[0.2] dark:bg-black dark:text-neutral-200 dark:hover:bg-neutral-900"
       aria-label="Toggle theme"
     >
       <m.div
@@ -33,7 +33,7 @@ export function ModeToggle() {
         transition={{ duration: 0.2 }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <Moon className="h-5 w-5" />
+        <Moon className="h-4 w-4" />
       </m.div>
       <m.div
         initial={false}
@@ -45,7 +45,7 @@ export function ModeToggle() {
         transition={{ duration: 0.2 }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <Sun className="h-5 w-5" />
+        <Sun className="h-4 w-4" />
       </m.div>
     </button>
   );

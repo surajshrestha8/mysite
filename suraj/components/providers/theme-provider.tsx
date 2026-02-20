@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { LazyMotion, domAnimation } from "motion/react";
+import { LazyMotion, domMax } from "motion/react";
 
 export function ThemeProvider({
   children,
@@ -10,7 +10,7 @@ export function ThemeProvider({
 }: React.ComponentProps<typeof NextThemesProvider>) {
   return (
     <NextThemesProvider {...props}>
-      <LazyMotion features={domAnimation}>{children}</LazyMotion>
+      <LazyMotion features={domMax}>{children}</LazyMotion>
     </NextThemesProvider>
   );
 }
