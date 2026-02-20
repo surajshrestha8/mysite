@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { MapPin, Terminal, ArrowRight, Mail } from "lucide-react";
 import { Spotlight } from "@/components/ui/spotlight";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -34,7 +34,7 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center">
         {/* Terminal Header Badge */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -48,11 +48,11 @@ export function Hero() {
           <span className="mx-1 text-neutral-300 dark:text-neutral-700">|</span>
           <MapPin className="h-3 w-3" />
           <span>~/pokhara/nepal</span>
-        </motion.div>
+        </m.div>
 
         {/* Main Terminal Heading */}
         <div className="mx-auto min-h-[120px] max-w-4xl sm:min-h-[160px]">
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -61,16 +61,16 @@ export function Hero() {
             <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">
               {displayText}
             </span>
-            <motion.span
+            <m.span
               animate={{ opacity: [0, 1, 0] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
               className="ml-1 inline-block h-10 w-3 bg-indigo-500 md:h-16 md:w-4"
             />
-          </motion.h1>
+          </m.h1>
         </div>
 
         {/* Streaming Description */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.5 }}
@@ -80,10 +80,10 @@ export function Hero() {
             words={siteConfig.description}
             className="font-normal text-neutral-600 dark:text-slate-400"
           />
-        </motion.div>
+        </m.div>
 
         {/* Terminal Command Buttons */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 2.2 }}
@@ -108,7 +108,7 @@ export function Hero() {
             ./contact.sh
             <Mail className="ml-2 h-4 w-4 transition-colors group-hover:text-indigo-500" />
           </a>
-        </motion.div>
+        </m.div>
 
         {/* Background Grid Accent (Optional, built with CSS for simplicity) */}
         <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-[#0a0a0a]"></div>

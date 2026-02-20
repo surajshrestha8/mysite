@@ -15,18 +15,17 @@ import {
   SiGit,
   SiVercel,
   SiPayloadcms,
-  SiAmazon,
   SiAmazonwebservices,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
-export interface Skill {
+interface Skill {
   name: string;
   icon: React.ElementType;
   color: string; // Brand hex color for hover effect
 }
 
-export interface SkillCategory {
+interface SkillCategory {
   title: string;
   description: string;
   skills: Skill[];
@@ -76,5 +75,3 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
 ];
-
-export const allSkills = skillCategories.flatMap((cat) => cat.skills);

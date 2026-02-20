@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { SectionWrapper } from "@/components/layout/section-wrapper";
 import { experiences } from "@/data/experience";
 import { ChevronDown, GitCommit, ExternalLink } from "lucide-react";
@@ -21,7 +21,7 @@ export function Experience() {
 
   return (
     <SectionWrapper id="experience">
-      <motion.h2
+      <m.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -32,9 +32,9 @@ export function Experience() {
         <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400">
           Experience
         </span>
-      </motion.h2>
+      </m.h2>
 
-      <motion.p
+      <m.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -42,11 +42,11 @@ export function Experience() {
         className="mx-auto mb-16 max-w-xl text-center text-neutral-500 dark:text-slate-400"
       >
         My career journey — told through commits
-      </motion.p>
+      </m.p>
 
       <div className="mx-auto max-w-3xl">
         {/* Git log header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -55,7 +55,7 @@ export function Experience() {
         >
           <span className="text-amber-600 dark:text-amber-400">$</span> git log
           --oneline --graph career
-        </motion.div>
+        </m.div>
 
         {/* Commit entries */}
         <div className="space-y-3">
@@ -65,8 +65,8 @@ export function Experience() {
             const isLatest = index === 0;
 
             return (
-              <motion.div
-                key={index}
+              <m.div
+                key={exp.company}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -135,19 +135,19 @@ export function Experience() {
                   </div>
 
                   {/* Expand arrow */}
-                  <motion.div
+                  <m.div
                     animate={{ rotate: isExpanded ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                     className="shrink-0"
                   >
                     <ChevronDown className="h-4 w-4 text-neutral-400 dark:text-slate-500" />
-                  </motion.div>
+                  </m.div>
                 </button>
 
                 {/* Expanded diff view */}
                 <AnimatePresence>
                   {isExpanded && (
-                    <motion.div
+                    <m.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
@@ -169,9 +169,9 @@ export function Experience() {
                             <div className="mb-2 text-[10px] font-semibold tracking-wider text-neutral-400 uppercase dark:text-slate-500">
                               Changes
                             </div>
-                            {exp.highlights.map((highlight, i) => (
+                            {exp.highlights.map((highlight) => (
                               <div
-                                key={i}
+                                key={highlight}
                                 className="flex items-start gap-2 rounded px-2 py-1 text-emerald-700 dark:text-emerald-400"
                               >
                                 <span className="shrink-0 font-bold">+</span>
@@ -204,16 +204,16 @@ export function Experience() {
                           </div>
                         </div>
                       </div>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
 
         {/* Git log footer */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -223,7 +223,7 @@ export function Experience() {
           <span className="text-neutral-300 dark:text-slate-600">────</span> End
           of log{" "}
           <span className="text-neutral-300 dark:text-slate-600">────</span>
-        </motion.div>
+        </m.div>
       </div>
     </SectionWrapper>
   );

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { ArrowLeft, Home, Terminal } from "lucide-react";
 
 export default function NotFound() {
@@ -28,7 +28,7 @@ export default function NotFound() {
 
         {/* Terminal Content */}
         <div className="p-6 text-sm sm:p-8 sm:text-base">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
@@ -79,7 +79,7 @@ export default function NotFound() {
                 </span>
               </Link>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </div>

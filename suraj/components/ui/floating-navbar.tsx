@@ -1,6 +1,6 @@
 "use client";
 import React, { JSX, useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import { m, useScroll, useMotionValueEvent } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 
@@ -51,7 +51,7 @@ export const FloatingNav = ({
   });
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.5 }}
@@ -63,7 +63,7 @@ export const FloatingNav = ({
     >
       {navItems.map((navItem, idx: number) => (
         <a
-          key={`link=${idx}`}
+          key={navItem.link}
           href={navItem.link}
           className={cn(
             "relative flex items-center space-x-1 rounded-full px-4 py-2 text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white",
@@ -75,7 +75,7 @@ export const FloatingNav = ({
             {navItem.name}
           </span>
           {activeSection === navItem.link && (
-            <motion.span
+            <m.span
               layoutId="activeNav"
               className="absolute inset-0 rounded-full border border-indigo-500/50 bg-indigo-500/10"
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -86,6 +86,6 @@ export const FloatingNav = ({
       <div className="flex items-center gap-3">
         <ModeToggle />
       </div>
-    </motion.div>
+    </m.div>
   );
 };

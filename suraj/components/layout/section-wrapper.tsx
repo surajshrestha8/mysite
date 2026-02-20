@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface SectionWrapperProps {
@@ -15,7 +15,7 @@ export function SectionWrapper({
   className,
 }: SectionWrapperProps) {
   return (
-    <motion.section
+    <m.section
       id={id}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -24,6 +24,6 @@ export function SectionWrapper({
       className={cn("mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8", className)}
     >
       {children}
-    </motion.section>
+    </m.section>
   );
 }

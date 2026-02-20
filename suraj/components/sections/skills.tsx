@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { SectionWrapper } from "@/components/layout/section-wrapper";
 import { skillCategories } from "@/data/skills";
 import { Code2, Server, Database, Wrench } from "lucide-react";
@@ -18,7 +18,7 @@ export function Skills() {
 
   return (
     <SectionWrapper id="skills">
-      <motion.h2
+      <m.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -29,9 +29,9 @@ export function Skills() {
         <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400">
           Technologies
         </span>
-      </motion.h2>
+      </m.h2>
 
-      <motion.p
+      <m.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -39,11 +39,11 @@ export function Skills() {
         className="mx-auto mb-16 max-w-xl text-center text-neutral-500 dark:text-slate-400"
       >
         Technologies I use to bring ideas to life
-      </motion.p>
+      </m.p>
 
       <div className="space-y-14">
         {skillCategories.map((category, catIndex) => (
-          <motion.div
+          <m.div
             key={category.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ export function Skills() {
                 const isHovered = hoveredSkill === skill.name;
 
                 return (
-                  <motion.div
+                  <m.div
                     key={skill.name}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -115,11 +115,11 @@ export function Skills() {
                     <span className="text-[10px] font-medium text-neutral-400 transition-colors group-hover:text-neutral-600 sm:text-xs dark:text-slate-500 dark:group-hover:text-slate-300">
                       {skill.name}
                     </span>
-                  </motion.div>
+                  </m.div>
                 );
               })}
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </SectionWrapper>

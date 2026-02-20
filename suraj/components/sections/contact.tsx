@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { m, AnimatePresence } from "motion/react";
 import { Github, Linkedin, Twitter, Mail, Check, Copy } from "lucide-react";
 import { siteConfig } from "@/data/site-config";
 
@@ -65,7 +65,7 @@ export function Contact() {
   return (
     <section id="contact" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -76,9 +76,9 @@ export function Contact() {
           <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400">
             Connect
           </span>
-        </motion.h2>
+        </m.h2>
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -86,10 +86,10 @@ export function Contact() {
           className="mx-auto mb-16 max-w-xl text-center text-neutral-500 dark:text-slate-400"
         >
           Ready to collaborate? Open a connection
-        </motion.p>
+        </m.p>
 
         {/* Terminal window */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -113,7 +113,7 @@ export function Contact() {
 
           <div className="bg-white p-5 font-mono text-sm dark:bg-[#1a1a1a]">
             {/* Connection message */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -136,10 +136,10 @@ export function Contact() {
                 Status:{" "}
                 <span className="text-emerald-500">● Available for hire</span>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Social links as commands */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -151,7 +151,7 @@ export function Contact() {
               </div>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {socialLinks.map((link, index) => (
-                  <motion.a
+                  <m.a
                     key={link.name}
                     href={link.url}
                     target={link.name === "Email" ? undefined : "_blank"}
@@ -176,13 +176,13 @@ export function Contact() {
                     <span className="text-[10px] text-neutral-300 transition-colors group-hover:text-indigo-400 dark:text-slate-700 dark:group-hover:text-indigo-500">
                       →
                     </span>
-                  </motion.a>
+                  </m.a>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Copy email shortcut */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -214,13 +214,13 @@ export function Contact() {
                   <Copy className="h-3.5 w-3.5 text-neutral-300 dark:text-slate-600" />
                 )}
               </button>
-            </motion.div>
+            </m.div>
 
             {/* Divider */}
             <div className="mb-6 border-t border-black/[0.06] dark:border-white/[0.06]" />
 
             {/* Message form as terminal input */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -286,7 +286,7 @@ export function Contact() {
                 >
                   <AnimatePresence mode="wait">
                     {submitted ? (
-                      <motion.span
+                      <m.span
                         key="sent"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -294,9 +294,9 @@ export function Contact() {
                       >
                         <Check className="h-3.5 w-3.5" />
                         Message sent successfully!
-                      </motion.span>
+                      </m.span>
                     ) : isSubmitting ? (
-                      <motion.span
+                      <m.span
                         key="sending"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -304,22 +304,22 @@ export function Contact() {
                       >
                         <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/20 border-t-white" />
                         Sending...
-                      </motion.span>
+                      </m.span>
                     ) : (
-                      <motion.span
+                      <m.span
                         key="idle"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                       >
                         $ send_message --submit
-                      </motion.span>
+                      </m.span>
                     )}
                   </AnimatePresence>
                 </button>
               </form>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useInView } from "motion/react";
+import { m, useInView } from "motion/react";
 import { useRef } from "react";
 import { SectionWrapper } from "@/components/layout/section-wrapper";
 import { siteConfig } from "@/data/site-config";
@@ -56,7 +56,7 @@ function CodeLine({
   delay?: number;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: -10 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
@@ -67,7 +67,7 @@ function CodeLine({
         {lineNumber}
       </span>
       <span className="flex-1">{children}</span>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -106,7 +106,7 @@ export function About() {
 
   return (
     <SectionWrapper id="about">
-      <motion.h2
+      <m.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -117,9 +117,9 @@ export function About() {
         <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400">
           Me
         </span>
-      </motion.h2>
+      </m.h2>
 
-      <motion.p
+      <m.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -127,11 +127,11 @@ export function About() {
         className="mx-auto mb-16 max-w-xl text-center text-neutral-500 dark:text-slate-400"
       >
         Get to know me — developer style
-      </motion.p>
+      </m.p>
 
       <div className="mx-auto max-w-3xl">
         {/* Code editor window */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -244,7 +244,7 @@ export function About() {
 
             {siteConfig.bio.map((paragraph, index) => (
               <CodeLine
-                key={index}
+                key={paragraph}
                 lineNumber={14 + index}
                 delay={0.75 + index * 0.1}
               >
@@ -308,7 +308,7 @@ export function About() {
               {punctuation(";")}
             </CodeLine>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Stats below editor */}
         <div className="mt-8 grid grid-cols-3 gap-4">
@@ -317,7 +317,7 @@ export function About() {
             { label: "Projects Shipped", value: stats.projectsCompleted },
             { label: "Technologies", value: stats.technologiesUsed },
           ].map((stat, index) => (
-            <motion.div
+            <m.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -331,7 +331,7 @@ export function About() {
               <div className="mt-1 text-xs text-neutral-500 dark:text-slate-500">
                 {stat.label}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

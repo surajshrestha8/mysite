@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import Image from "next/image";
+import { m } from "motion/react";
 import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
 import { SectionWrapper } from "@/components/layout/section-wrapper";
 import { projects } from "@/data/projects";
@@ -48,13 +49,12 @@ function BrowserMockup({
       {/* Website preview area */}
       <div className="relative h-48 overflow-hidden sm:h-56">
         {image ? (
-          // Use img tag for simplicity or verify if next/image is available. Project likely uses standard img or has next/image.
-          // Using standard img as user hasn't specified image optimization preference and simpler for now.
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={image}
             alt={title}
-            className="h-full w-full object-cover object-top"
+            fill
+            className="object-cover object-top"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         ) : (
           <>
@@ -99,7 +99,7 @@ function BrowserMockup({
 export function Projects() {
   return (
     <SectionWrapper id="projects">
-      <motion.h2
+      <m.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -110,9 +110,9 @@ export function Projects() {
         <span className="bg-gradient-to-r from-indigo-500 to-indigo-600 bg-clip-text text-transparent dark:from-indigo-400">
           Projects
         </span>
-      </motion.h2>
+      </m.h2>
 
-      <motion.p
+      <m.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -120,12 +120,12 @@ export function Projects() {
         className="mx-auto mb-16 max-w-xl text-center text-neutral-500 dark:text-slate-400"
       >
         A selection of projects I&apos;ve built and contributed to
-      </motion.p>
+      </m.p>
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {projects.map((project, index) => (
-          <motion.div
-            key={index}
+          <m.div
+            key={project.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -238,7 +238,7 @@ export function Projects() {
                 </>
               )}
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </SectionWrapper>

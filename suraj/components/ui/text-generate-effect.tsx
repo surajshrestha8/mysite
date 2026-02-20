@@ -1,7 +1,31 @@
 "use client";
 import { useEffect } from "react";
-import { motion, stagger, useAnimate } from "motion/react";
+import { m, stagger, useAnimate } from "motion/react";
 import { cn } from "@/lib/utils";
+
+function WordsRenderer({
+  wordsArray,
+  scope,
+  filter,
+}: {
+  wordsArray: string[];
+  scope: React.RefObject<HTMLElement>;
+  filter: boolean;
+}) {
+  return (
+    <m.div ref={scope}>
+      {wordsArray.map((word, idx) => (
+        <m.span
+          key={word + idx}
+          className="opacity-0"
+          style={{ filter: filter ? "blur(10px)" : "none" }}
+        >
+          {word}{" "}
+        </m.span>
+      ))}
+    </m.div>
+  );
+}
 
 export const TextGenerateEffect = ({
   words,
@@ -16,6 +40,7 @@ export const TextGenerateEffect = ({
 }) => {
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
+
   useEffect(() => {
     animate(
       "span",
@@ -31,30 +56,16 @@ export const TextGenerateEffect = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderWords = () => {
-    return (
-      <motion.div ref={scope}>
-        {wordsArray.map((word, idx) => {
-          return (
-            <motion.span
-              key={word + idx}
-              className="opacity-0"
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
-            >
-              {word}{" "}
-            </motion.span>
-          );
-        })}
-      </motion.div>
-    );
-  };
-
   return (
     <div className={cn("font-bold", className)}>
       <div className="mt-4">
-        <div className="leading-snug tracking-wide">{renderWords()}</div>
+        <div className="leading-snug tracking-wide">
+          <WordsRenderer
+            wordsArray={wordsArray}
+            scope={scope}
+            filter={filter}
+          />
+        </div>
       </div>
     </div>
   );

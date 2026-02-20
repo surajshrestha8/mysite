@@ -10,7 +10,9 @@
       "Bash(npx shadcn@latest init:*)",
       "Bash(npx shadcn@latest add:*)",
       "Bash(git -C /c/Users/manju/Desktop/suraj/suraj diff app/page.tsx)",
-      "Bash(git -C /c/Users/manju/Desktop/suraj/suraj show HEAD:suraj/app/page.tsx)"
+      "Bash(git -C /c/Users/manju/Desktop/suraj/suraj show HEAD:suraj/app/page.tsx)",
+      "Bash(npx -y react-doctor@latest . --verbose --diff)",
+      "Bash(npx:*)"
     ]
   }
 }

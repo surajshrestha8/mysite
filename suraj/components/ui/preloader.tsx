@@ -1,7 +1,45 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useReducer, useEffect, useCallback } from "react";
+import { m, AnimatePresence } from "motion/react";
+
+type PreloaderState = {
+  isLoading: boolean;
+  visibleLines: number[];
+  typingIndex: number | null;
+  typedText: string;
+};
+
+type PreloaderAction =
+  | { type: "SHOW_LINE"; index: number }
+  | { type: "START_TYPING"; index: number }
+  | { type: "UPDATE_TYPED_TEXT"; text: string }
+  | { type: "STOP_TYPING"; index: number }
+  | { type: "HIDE" };
+
+function reducer(
+  state: PreloaderState,
+  action: PreloaderAction,
+): PreloaderState {
+  switch (action.type) {
+    case "SHOW_LINE":
+      return { ...state, visibleLines: [...state.visibleLines, action.index] };
+    case "START_TYPING":
+      return { ...state, typingIndex: action.index, typedText: "" };
+    case "UPDATE_TYPED_TEXT":
+      return { ...state, typedText: action.text };
+    case "STOP_TYPING":
+      return {
+        ...state,
+        typingIndex: null,
+        visibleLines: [...state.visibleLines, action.index],
+      };
+    case "HIDE":
+      return { ...state, isLoading: false };
+    default:
+      return state;
+  }
+}
 
 const COMMANDS = [
   { prompt: "~", command: "node portfolio.js", delay: 0 },
@@ -43,24 +81,25 @@ const COMMANDS = [
 ];
 
 export function Preloader() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [visibleLines, setVisibleLines] = useState<number[]>([]);
-  const [typingIndex, setTypingIndex] = useState<number | null>(null);
-  const [typedText, setTypedText] = useState("");
+  const [{ isLoading, visibleLines, typingIndex, typedText }, dispatch] =
+    useReducer(reducer, {
+      isLoading: true,
+      visibleLines: [],
+      typingIndex: null,
+      typedText: "",
+    });
 
   const typeText = useCallback((text: string, lineIndex: number) => {
     let charIndex = 0;
-    setTypingIndex(lineIndex);
-    setTypedText("");
+    dispatch({ type: "START_TYPING", index: lineIndex });
 
     const typeInterval = setInterval(() => {
       if (charIndex <= text.length) {
-        setTypedText(text.slice(0, charIndex));
+        dispatch({ type: "UPDATE_TYPED_TEXT", text: text.slice(0, charIndex) });
         charIndex++;
       } else {
         clearInterval(typeInterval);
-        setTypingIndex(null);
-        setVisibleLines((prev) => [...prev, lineIndex]);
+        dispatch({ type: "STOP_TYPING", index: lineIndex });
       }
     }, 25);
 
@@ -75,7 +114,7 @@ export function Preloader() {
       const timeout = setTimeout(() => {
         if (cmd.isOutput) {
           // Output lines appear instantly
-          setVisibleLines((prev) => [...prev, index]);
+          dispatch({ type: "SHOW_LINE", index });
         } else {
           // Command lines get typed out
           const interval = typeText(cmd.command, index);
@@ -87,7 +126,7 @@ export function Preloader() {
 
     // Exit preloader
     const exitTimeout = setTimeout(() => {
-      setIsLoading(false);
+      dispatch({ type: "HIDE" });
     }, 2600);
     timeouts.push(exitTimeout);
 
@@ -100,7 +139,7 @@ export function Preloader() {
   return (
     <AnimatePresence>
       {isLoading && (
-        <motion.div
+        <m.div
           initial={{ opacity: 1 }}
           exit={{ y: "-100%", opacity: 1 }}
           transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
@@ -108,7 +147,7 @@ export function Preloader() {
         >
           <div className="w-full max-w-lg px-6">
             {/* Terminal window */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
@@ -134,8 +173,8 @@ export function Preloader() {
 
                   if (cmd.isOutput) {
                     return (
-                      <motion.div
-                        key={index}
+                      <m.div
+                        key={cmd.delay}
                         initial={{ opacity: 0, x: -4 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.2 }}
@@ -148,19 +187,19 @@ export function Preloader() {
                         }
                       >
                         {cmd.command}
-                      </motion.div>
+                      </m.div>
                     );
                   }
 
                   return (
-                    <div key={index} className="flex items-center gap-2">
+                    <div key={cmd.delay} className="flex items-center gap-2">
                       <span className="text-indigo-400">{cmd.prompt}</span>
                       <span className="text-green-400">$</span>
                       <span className="text-[#e6edf3]">
                         {isTyping ? typedText : cmd.command}
                       </span>
                       {isTyping && (
-                        <motion.span
+                        <m.span
                           animate={{ opacity: [1, 0] }}
                           transition={{
                             duration: 0.6,
@@ -179,7 +218,7 @@ export function Preloader() {
                   <div className="flex items-center gap-2">
                     <span className="text-indigo-400">~</span>
                     <span className="text-green-400">$</span>
-                    <motion.span
+                    <m.span
                       animate={{ opacity: [1, 0] }}
                       transition={{
                         duration: 0.6,
@@ -191,9 +230,9 @@ export function Preloader() {
                   </div>
                 )}
               </div>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );
