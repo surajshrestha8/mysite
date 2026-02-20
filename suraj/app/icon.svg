@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background -->
+  <rect width="32" height="32" rx="7" fill="#0a0a0a"/>
+  <!-- Subtle indigo border -->
+  <rect width="32" height="32" rx="7" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-opacity="0.4"/>
+  <!-- </> symbol in indigo -->
+  <text
+    x="16"
+    y="21"
+    font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace"
+    font-size="12"
+    font-weight="700"
+    fill="#6366f1"
+    text-anchor="middle"
+    letter-spacing="-0.3"
+  >&lt;/&gt;</text>
+</svg>

@@ -27,8 +27,11 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
   openGraph: siteConfig.seo.openGraph,
   twitter: siteConfig.seo.twitter,
+  alternates: {
+    canonical: siteConfig.seo.url,
+  },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
   },
 };
 

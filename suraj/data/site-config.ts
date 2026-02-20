@@ -27,7 +27,7 @@ export const siteConfig = {
     description:
       "Portfolio of Suraj Shrestha — a Next JS developer from Pokhara, Nepal, specializing in Next.js, React, and TypeScript.",
     url: "https://surajshresth.com.np",
-    ogImage: "https://suraj.dev/og.png",
+    ogImage: "https://surajshresth.com.np/og.png",
     keywords: [
       "Suraj Shrestha",
       "Next JS Developer",
@@ -38,11 +38,11 @@ export const siteConfig = {
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: "https://suraj.dev",
+      url: "https://surajshresth.com.np",
       siteName: "Suraj Shrestha",
       images: [
         {
-          url: "https://suraj.dev/og.png",
+          url: "https://surajshresth.com.np/og.png",
           width: 1200,
           height: 630,
           alt: "Suraj Shrestha - Next JS Developer",
@@ -53,7 +53,7 @@ export const siteConfig = {
       card: "summary_large_image",
       site: "@suraj",
       creator: "@suraj",
-      images: ["https://suraj.dev/og.png"],
+      images: ["https://surajshresth.com.np/og.png"],
     },
   },
 };
