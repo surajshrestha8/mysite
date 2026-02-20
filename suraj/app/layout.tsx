@@ -32,6 +32,24 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.fullName,
+  jobTitle: siteConfig.title,
+  url: siteConfig.seo.url,
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: siteConfig.location,
+  },
+  sameAs: [
+    siteConfig.social.github,
+    siteConfig.social.linkedin,
+    siteConfig.social.twitter,
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -39,6 +57,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-white text-neutral-900 antialiased selection:bg-indigo-500/30 selection:text-indigo-200 dark:bg-black dark:text-neutral-50`}
       >
